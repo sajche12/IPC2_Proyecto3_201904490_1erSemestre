@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SOLICITAR SERVICIO</title>
+	<link rel="stylesheet" type="text/css" href="">
+</head>
+<body>
+	<h1>BIENVENIDO</h1>
+	<form method="post">
+		{% csrf_token %}
+		<label for="lugar">Lugar y Fecha: Guatemala, {{ fecha }} {{ hora }}</label><br>
+		<label for="usuario">Usuario: </label>{{ form.usuario }}<br>
+		<label for="red_social">Red social: ChapinChat</label><br>
+		<label for="mensaje">Mensaje:</label>{{ form.mensaje }}<br>
+        <button type="button">Enviar mensaje</button>
+	</form>
+    
+</body>
+</html>
+
+{% endblock %}
+

@@ -1,0 +1,80 @@
+<?xml version="1.0"?> 
+<configuracion> 
+	<perfiles> 
+		<perfil> 
+			<nombre>Deportista</nombre> 
+			<palabrasClave> 
+				<palabra>fútbol</palabra>
+				<palabra>balonmano</palabra> 
+				<palabra>balompié</palabra> 
+				<palabra>football</palabra> 
+				<palabra>basketball</palabra> 
+				<palabra>handball</palabra> 
+				<palabra>estadio</palabra> 
+				<palabra>selección</palabra> 
+				<palabra>champions league</palabra> 
+				<palabra>liga de campeones</palabra> 
+				<palabra>tenis</palabra> 
+				<palabra>natación</palabra> 
+				<palabra>olimpiada</palabra> 
+				<palabra>gym</palabra> 
+				<palabra>gimnasio</palabra> 
+			</palabrasClave> 
+		</perfil> 
+		<perfil> 
+			<nombre>Cultura saludable</nombre> 
+			<palabrasClave> 
+				<palabra>gimnasio</palabra>
+				<palabra>comida saludable</palabra> 
+				<palabra>ejercicio</palabra> 
+				<palabra>maratón</palabra> 
+				<palabra>carrera</palabra> 
+				<palabra>entreno</palabra> 
+				<palabra>entrenar</palabra> 
+				<palabra>entrenamiento</palabra> 
+				<palabra>pesas</palabra> 
+				<palabra>karate</palabra> 
+				<palabra>tae kwon do</palabra> 
+				<palabra>boxeo</palabra> 
+				<palabra>gym</palabra> 
+				<palabra>healthy food</palabra> 
+				<palabra>vitaminas</palabra> 
+				<palabra>caminata</palabra>
+				<palabra>caminar</palabra> 
+				<palabra>ropa deportiva</palabra> 
+				<palabra>bebida hidratante</palabra> 
+				<palabra>bebidas hidratantes</palabra> 
+			</palabrasClave> 
+		</perfil> 
+	</perfiles> 
+	<descartadas> 
+		<palabra>a</palabra>
+		<palabra>un</palabra>
+		<palabra>una</palabra>
+		<palabra>en</palabra>
+		<palabra>para</palabra>
+		<palabra>por</palabra>
+		<palabra>que</palabra>
+		<palabra>qué</palabra>
+		<palabra>la</palabra>
+		<palabra>las</palabra>
+		<palabra>los</palabra>
+		<palabra>el</palabra>
+		<palabra>unas</palabra>
+		<palabra>si</palabra>
+		<palabra>no</palabra>
+		<palabra>sino</palabra>
+		<palabra>entre</palabra>
+		<palabra>otro</palabra>
+		<palabra>otra</palabra>
+		<palabra>otros</palabra>
+		<palabra>otras</palabra>
+		<palabra>de</palabra>
+		<palabra>del</palabra>
+		<palabra>nos</palabra>
+		<palabra>sus</palabra>
+		<palabra>su</palabra>
+		<palabra>am</palabra>
+		<palabra>pm</palabra>
+	</descartadas> 
+</configuracion>
