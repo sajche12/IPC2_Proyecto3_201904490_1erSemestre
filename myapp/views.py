@@ -5,6 +5,8 @@ from django.http import HttpResponse
 from xml.etree import ElementTree as ET
 
 # Create your views here.
+diccionario = {}  # Diccionario para guardar cada uno de los perfiles
+resultados = {}  # Diccionario para guardar los resultados
 
 
 def solicitar_servicio(request):
@@ -23,8 +25,6 @@ def solicitar_servicio(request):
                     root = tree.getroot()
 
                     palabras_descartadas = []  # Lista para las palabras descartadas
-                    global diccionario
-                    diccionario = {}  # Diccionario para guardar cada uno de los perfiles
 
                     for perfil in root.findall('./perfiles/perfil'):
                         nombre_perfil = perfil.find('nombre').text
@@ -76,16 +76,13 @@ def solicitar_servicio(request):
             for perfil, palabras in diccionario.items():
                 conteo_palabras[perfil] = len(palabras)
 
-            global resultados
-            resultados = {}
             for perfil, coincidencias in contador.items():
                 resultados[perfil] = round(
                     (coincidencias / conteo_mensaje_construido)*100, 2)
-            
 
     else:
         form = CargarDatos()
-    return render(request, 'servicio.html', {'fecha': fecha_actual, 'hora': hora_actual, 'form': form, 'resultados': resultados, 'nombres_perfiles': diccionario})
+    return render(request, 'servicio.html', {'fecha': fecha_actual, 'hora': hora_actual, 'form': form})
 
 
 def peticiones(request):
@@ -100,4 +97,4 @@ def reset(request):
     return render(request, 'reset.html')
 
 def resultado(request):
-    return render(request, 'resultados.html', {'resultados': resultados, 'nombres_perfiles': diccionario})
+    return render(request, 'resultados.html', {'res':resultados})

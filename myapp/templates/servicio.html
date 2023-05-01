@@ -10,7 +10,7 @@
 </head>
 <body>
 	<h1>BIENVENIDO</h1>
-	<form action="resultados/" method="post" enctype="multipart/form-data">
+	<form  action="resultados/" method="post" enctype="multipart/form-data">
 		{% csrf_token %}
 		<label for="lugar">Lugar y Fecha: Guatemala, {{ fecha }} {{ hora }}</label><br>
 		<label for="usuario">Usuario: </label>{{ form.usuario }}<br>

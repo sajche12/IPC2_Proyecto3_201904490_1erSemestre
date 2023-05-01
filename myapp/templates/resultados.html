@@ -1,1 +1,22 @@
-<h1>RESULTADOS:</h1>
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>RESULTADOS</title>
+	<link rel="stylesheet" type="text/css" href="">
+</head>
+<body>
+	<h1>RESULTADOS:</h1>
+	{% for clave, valor in res.items %}
+
+	{{ clave }}: {{ valor }}%<br>
+
+	{% endfor %}
+</body>
+</html>
+
+{% endblock %}
+
