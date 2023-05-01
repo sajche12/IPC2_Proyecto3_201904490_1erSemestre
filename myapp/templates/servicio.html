@@ -10,15 +10,16 @@
 </head>
 <body>
 	<h1>BIENVENIDO</h1>
-	<form method="post">
+	<form action="resultados/" method="post" enctype="multipart/form-data">
 		{% csrf_token %}
 		<label for="lugar">Lugar y Fecha: Guatemala, {{ fecha }} {{ hora }}</label><br>
 		<label for="usuario">Usuario: </label>{{ form.usuario }}<br>
 		<label for="red_social">Red social: ChapinChat</label><br>
 		<label for="mensaje">Mensaje:</label>{{ form.mensaje }}<br>
-        <button type="button">Enviar mensaje</button>
+		<label for="archivo">Cargue el archivo con los perfiles y palabras descartadas aqui:</label><br>
+		<input type="file" id="archivo" name="archivo" accept="application/xml"><br><br>
+		<button type="submit">Enviar mensaje</button>
 	</form>
-    
 </body>
 </html>
 
