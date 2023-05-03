@@ -6,5 +6,11 @@ urlpatterns = [
     path('peticiones/', views.peticiones),
     path('ayuda/', views.ayuda),
     path('reset/', views.reset),
-    path('servicio/resultados/', views.resultado),
+    path('detalles/', views.detalles),
+    path('resumen/', views.resumen),
+    path('solicitudes/', views.solicitudes),
+    path('export/', views.exportar_detalles),
+    path('export_resume/', views.exportar_resumen),
+    path('informacion/', views.informacion),
+    path('documentacion/', views.documentacion),
 ]

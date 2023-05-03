@@ -3,11 +3,19 @@ from datetime import datetime
 from .forms import CargarDatos
 from django.http import HttpResponse
 from xml.etree import ElementTree as ET
+from django.template.loader import render_to_string
+from weasyprint import HTML
+from django.http import FileResponse
+import os
+
 
 # Create your views here.
-diccionario = {}  # Diccionario para guardar cada uno de los perfiles
-resultados = {}  # Diccionario para guardar los resultados
-
+respuestas = {}
+horas = list()
+fechas = list()
+respuestas["fechas"] = fechas
+respuestas["horas"] = horas
+usuarios = list()
 
 def solicitar_servicio(request):
     ahora = datetime.now()
@@ -16,14 +24,19 @@ def solicitar_servicio(request):
     if request.method == 'POST':
         form = CargarDatos(request.POST, request.FILES)
         if form.is_valid():
+            global usuario
             usuario = form.cleaned_data['usuario']
+            if usuario not in usuarios:
+                usuarios.append(usuario)
             mensaje = form.cleaned_data['mensaje']
             archivo_xml = request.FILES.get('archivo')
             if archivo_xml and archivo_xml.name.endswith('.xml'):
                 try:
                     tree = ET.parse(archivo_xml)
                     root = tree.getroot()
-
+                    global diccionario
+                    diccionario = {}  # Diccionario para guardar cada uno de los perfiles
+                    global palabras_descartadas
                     palabras_descartadas = []  # Lista para las palabras descartadas
 
                     for perfil in root.findall('./perfiles/perfil'):
@@ -76,10 +89,21 @@ def solicitar_servicio(request):
             for perfil, palabras in diccionario.items():
                 conteo_palabras[perfil] = len(palabras)
 
+            global resultados
+            resultados = {}  # Diccionario para guardar los resultados
             for perfil, coincidencias in contador.items():
                 resultados[perfil] = round(
                     (coincidencias / conteo_mensaje_construido)*100, 2)
 
+            resultados_str = [
+                f"{perfil}: {porcentaje}%" for perfil, porcentaje in resultados.items()]
+            resultados_como_cadena = ", ".join(resultados_str)
+            
+            respuestas["horas"].append(hora_actual)
+            respuestas["fechas"].append(fecha_actual)
+            global zipped_list
+            zipped_list = zip(respuestas['fechas'], respuestas['horas'])
+            return HttpResponse(f"<h1>RESULTADOS:</h1><br>{resultados_como_cadena}")
     else:
         form = CargarDatos()
     return render(request, 'servicio.html', {'fecha': fecha_actual, 'hora': hora_actual, 'form': form})
@@ -88,13 +112,61 @@ def solicitar_servicio(request):
 def peticiones(request):
     return render(request, 'peticiones.html')
 
-
 def ayuda(request):
     return render(request, 'ayuda.html')
 
-
 def reset(request):
+    respuestas.clear()
+    horas.clear()
+    fechas.clear()
+    respuestas["fechas"] = fechas
+    respuestas["horas"] = horas
+    usuarios.clear()
+    diccionario.clear()
+    palabras_descartadas.clear()
+    resultados.clear()
     return render(request, 'reset.html')
 
-def resultado(request):
-    return render(request, 'resultados.html', {'res':resultados})
+def detalles(request):
+    return render(request, 'detalles.html', {'dic':diccionario, 'res':zipped_list, 'lista_usuarios':usuarios, 'resultados':resultados, 'usuario':usuario})
+
+def resumen(request):
+    return render(request, 'resumen.html', {'resultados':resultados, 'lista_usuarios':usuarios, 'usuario':usuario})
+
+def solicitudes(request):
+    return render(request, 'peticiones.html')
+
+def exportar_detalles(request):
+    context = {}
+    html = render_to_string("detalles.html", context)
+    response = HttpResponse(content_type="application/pdf")
+    response["Content-Disposition"] = "inline; detalles.pdf"    
+    HTML(string=html).write_pdf(response)
+    response['Content-Disposition'] = 'attachment; filename="detalles.pdf"'
+    
+    return response
+
+def exportar_resumen(request):
+    context = {}
+    html = render_to_string("resumen.html", context)
+    response = HttpResponse(content_type="application/pdf")
+    response["Content-Disposition"] = "inline; resumen.pdf"    
+    HTML(string=html).write_pdf(response)
+    response['Content-Disposition'] = 'attachment; filename="resumen.pdf"'
+    
+    return response
+
+def informacion(request):
+    nombre = "Diego Aldair Sajche Avila"
+    carne = 201904490
+    cui = 3011869790101
+    link = "https://github.com/sajche12/IPC2_Proyecto3_201904490"
+    return HttpResponse(f"<h2>Nombre: {nombre}</h2><br><h2>Carne: {carne}</h2><br><h2>CUI: {cui}</h2><br><h2>Link del repositorio: {link}</h2>")
+
+def documentacion(request):
+    #obtener la ruta completa del archivo
+    full_path = os.path.join('Documentacion/Cervezas.pdf') 
+    #Abrir el archivo en modo binario
+    pdf = open(full_path, 'rb') 
+    #retornar la respuesta del archivo pdf
+    return FileResponse(pdf, content_type='application/pdf')
