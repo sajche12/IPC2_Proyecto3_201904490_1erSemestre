@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from datetime import datetime
-from .forms import CargarDatos
+from .forms import CargarDatos, PruebaSolicitudes
 from django.http import HttpResponse
 from xml.etree import ElementTree as ET
 from django.template.loader import render_to_string
@@ -134,7 +134,29 @@ def resumen(request):
     return render(request, 'resumen.html', {'resultados':resultados, 'lista_usuarios':usuarios, 'usuario':usuario})
 
 def solicitudes(request):
-    return render(request, 'peticiones.html')
+    form = PruebaSolicitudes()
+    if request.method == 'POST':
+        form = PruebaSolicitudes(request.FILES)
+        if form.is_valid():
+            archivo_xml = request.FILES.get('xml')
+            if archivo_xml and archivo_xml.name.endswith('.xml'):
+                try:
+                    tree = ET.parse(archivo_xml)
+                    root = tree.getroot()
+                    palabras_clave = root.findall(".//text()[contains(., 'Guatemala')]")
+
+                    fecha_hora = ""
+
+                    if palabras_clave:
+                        inicio = palabras_clave[0].find(":") + 2 # add 2 because ": " has 2 characters
+                        fecha_hora = palabras_clave[0][inicio:]
+                    print(fecha_hora)
+
+                    
+                except ET.ParseError:
+                    return HttpResponse("Error al procesar el archivo XML")
+                
+    return render(request, 'solicitudes.html', {'form':form})
 
 def exportar_detalles(request):
     context = {}
@@ -165,7 +187,7 @@ def informacion(request):
 
 def documentacion(request):
     #obtener la ruta completa del archivo
-    full_path = os.path.join('Documentacion/Cervezas.pdf') 
+    full_path = os.path.join('Documentacion/Documentacion.pdf') 
     #Abrir el archivo en modo binario
     pdf = open(full_path, 'rb') 
     #retornar la respuesta del archivo pdf

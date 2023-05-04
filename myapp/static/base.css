@@ -1,0 +1,65 @@
+body {
+    background: #202020;
+    color: whitesmoke;
+
+}
+
+.navbar {
+    background: #404040;
+    color: white;
+    padding: 5px 10px;
+}
+
+.navbar ul{
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.navbar ul li a{
+    color: white;
+    text-decoration: none;
+
+}
+
+.navbar ul li a:hover{
+    color:salmon;
+
+}
+
+
+.navbar2 {
+    background: #404040;
+    color: white;
+    padding: 5px 20px;
+}
+
+.navbar2 ul{
+    display: ruby;
+    justify-content: center;
+
+}
+
+.navbar2 ul li a{
+    color: white;
+    text-decoration: none;
+
+}
+
+.navbar3 {
+    background: #404040;
+    color: white;
+    padding: 5px 20px;
+}
+
+.navbar3 ul{
+    display: ruby;
+    justify-content: center;
+
+}
+
+.navbar3 ul li a{
+    color: white;
+    text-decoration: none;
+
+}
