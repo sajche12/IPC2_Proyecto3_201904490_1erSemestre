@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<respuesta>
+	<fechaHora></fechaHora>
+	<usuario></usuario>
+	<perfiles>
+		<perfil>
+			<nombre></nombre>
+			<porcentajeProbabilidad></porcentajeProbabilidad>
+			<pesoActual></pesoActual>
+		</perfil>
+	</perfiles>
+</respuesta>

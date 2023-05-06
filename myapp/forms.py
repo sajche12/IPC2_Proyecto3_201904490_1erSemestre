@@ -5,4 +5,5 @@ class CargarDatos(forms.Form):
     mensaje = forms.CharField(label="Mensaje", widget=forms.Textarea)
 
 class PruebaSolicitudes(forms.Form):
-    entrada = forms.FileField(label="Agregue el archivo de entrada")
+    entrada = forms.FileField()
+

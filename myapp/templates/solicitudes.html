@@ -13,8 +13,10 @@
     <h1>PRUEBA DE SOLICITUDES DE CREACION DE MENSAJES</h1>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Enviar archivo</button>
+        <label for="archivo_xml">Inserte el xml de los mensajes aqui:</label><br><br>
+        <input type="file" id="archivo" name="archivo" accept="application/xml"><br><br>
+        <br><br>
+        <button type="submit">Enviar</button>
     </form>
 </body>
 </html>

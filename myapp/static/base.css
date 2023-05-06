@@ -1,12 +1,12 @@
 body {
-    background: #202020;
-    color: whitesmoke;
-
+    background: #404040;
+    color: #F0F8FF;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .navbar {
-    background: #404040;
-    color: white;
+    background: black;
+    color: #F0F8FF;
     padding: 5px 10px;
 }
 

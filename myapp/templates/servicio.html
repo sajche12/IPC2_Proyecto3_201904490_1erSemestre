@@ -6,7 +6,7 @@
 <html>
 <head>
 	<title>SOLICITAR SERVICIO</title>
-	<link rel="stylesheet" type="text/css" href="">
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 </head>
 <body>
 	<h1>SOLICITAR SERVICIO</h1>
@@ -15,7 +15,7 @@
 		<label for="lugar">Lugar y Fecha: Guatemala, {{ fecha }} {{ hora }}</label><br>
 		<label for="usuario">Usuario: </label>{{ form.usuario }}<br>
 		<label for="red_social">Red social: ChapinChat</label><br>
-		<label for="mensaje">Mensaje:</label>{{ form.mensaje }}<br>
+		<label for="mensaje">Mensaje:</label><br>{{ form.mensaje }}<br>
 		<label for="archivo">Cargue el archivo con los perfiles y palabras descartadas aqui:</label><br>
 		<input type="file" id="archivo" name="archivo" accept="application/xml"><br><br>
 		<button type="submit">Enviar mensaje</button>
